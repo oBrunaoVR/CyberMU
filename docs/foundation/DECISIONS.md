@@ -17,6 +17,7 @@
 | 2026-11-12 | DECISÃO TÉCNICA | Câmera do cliente segue o jogador local com ângulo fixo. Enquadramento exato, zoom e rotação PENDENTES DE VERIFICAÇÃO (0.99D). |
 | 2026-11-12 | DECISÃO CONFIRMADA | Referência de mecânicas = MU Online 0.99D. Dark Lord e Castle Siege NÃO existiam na 0.99D (indícios: Dark Lord chegou no patch 0.99Z, dez/2004; Castle Siege na Season 1). Eles entram como inclusões aprovadas pelo dono do projeto, trazidos da versão imediatamente seguinte. Somente esses dois: nenhum outro conteúdo de versões posteriores entra sem nova aprovação. |
 | 2026-11-12 | PENDENTE | Camada "Ignore Raycast" nas cápsulas de jogador precisa ser revista quando houver combate (clicar em alvos). |
+| 2026-11-12 | DECISÃO CONFIRMADA | Persistência em SQLite (arquivo único), acessado somente pelo servidor. Backup = cópia do arquivo. Migração para PostgreSQL só se o escopo crescer muito. |
 
 ## Como registrar decisões
 
