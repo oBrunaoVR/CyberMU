@@ -17,7 +17,7 @@ parecer cyberpunk.
 - Asas substituídas por jetpacks (mudança só visual; a função é a mesma das asas).
 - Itens normais e Excellent, aprimoramento +0 a +15, joias, trade, party, guild,
   Castle Siege.
-- Multiplayer com servidor autoritativo. Biblioteca de rede: AINDA NÃO DEFINIDA.
+- Multiplayer com servidor autoritativo. Biblioteca de rede: Mirror (servidor autoritativo).
 
 ## Regras de fidelidade
 - Não inventar mecânicas, atributos, fórmulas, valores, probabilidades,
