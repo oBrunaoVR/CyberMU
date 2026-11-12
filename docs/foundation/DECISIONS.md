@@ -15,6 +15,8 @@
 | 2026-11-12 | DECISÃO TÉCNICA | Testes locais com vários jogadores via Multiplayer Play Mode 2.0.2 (testado com Mirror: Host + Client). |
 | 2026-11-12 | DECISÃO TÉCNICA | Movimento via NavMesh no servidor; cliente só envia o destino. Velocidade e 'segurar para andar' PENDENTES DE VERIFICAÇÃO. |
 | 2026-11-12 | DECISÃO TÉCNICA | Câmera do cliente segue o jogador local com ângulo fixo. Enquadramento exato, zoom e rotação PENDENTES DE VERIFICAÇÃO (0.99D). |
+| 2026-11-12 | DECISÃO CONFIRMADA | Referência de mecânicas = MU Online 0.99D. Dark Lord e Castle Siege NÃO existiam na 0.99D (indícios: Dark Lord chegou no patch 0.99Z, dez/2004; Castle Siege na Season 1). Eles entram como inclusões aprovadas pelo dono do projeto, trazidos da versão imediatamente seguinte. Somente esses dois: nenhum outro conteúdo de versões posteriores entra sem nova aprovação. |
+| 2026-11-12 | PENDENTE | Camada "Ignore Raycast" nas cápsulas de jogador precisa ser revista quando houver combate (clicar em alvos). |
 
 ## Como registrar decisões
 
