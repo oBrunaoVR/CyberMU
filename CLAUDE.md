@@ -28,6 +28,11 @@ parecer cyberpunk.
 - Dark Lord e Castle Siege são as únicas exceções aprovadas vindas de
   versões posteriores à 0.99D. Qualquer outro conteúdo posterior exige
   aprovação.
+- Antes de implementar qualquer regra do MU, consulte
+  docs/foundation/MU_099D_REFERENCE.md. Use só o que estiver marcado como
+  CONFIRMADO ou FONTE DA ÉPOCA. O que estiver PENDENTE vira valor
+  configurável com comentário 'PENDENTE DE VERIFICAÇÃO'. O que estiver
+  marcado NÃO É 0.99D nunca deve ser implementado.
 
 ## Regras de arquitetura
 - O servidor é a autoridade final para inventário, drops, XP, combate, trade e
