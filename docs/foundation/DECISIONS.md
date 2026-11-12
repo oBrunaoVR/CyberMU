@@ -18,6 +18,7 @@
 | 2026-11-12 | DECISÃO CONFIRMADA | Referência de mecânicas = MU Online 0.99D. Dark Lord e Castle Siege NÃO existiam na 0.99D (indícios: Dark Lord chegou no patch 0.99Z, dez/2004; Castle Siege na Season 1). Eles entram como inclusões aprovadas pelo dono do projeto, trazidos da versão imediatamente seguinte. Somente esses dois: nenhum outro conteúdo de versões posteriores entra sem nova aprovação. |
 | 2026-11-12 | PENDENTE | Camada "Ignore Raycast" nas cápsulas de jogador precisa ser revista quando houver combate (clicar em alvos). |
 | 2026-11-12 | DECISÃO CONFIRMADA | Persistência em SQLite (arquivo único), acessado somente pelo servidor. Backup = cópia do arquivo. Migração para PostgreSQL só se o escopo crescer muito. |
+| 2026-11-12 | DECISÃO TÉCNICA | Biblioteca SQLite: SQLite-net for Unity (gilzoide/unity-sqlite-net, MIT). Ainda não instalada. Funcionamento no editor Unity 6.3, em build Windows Dedicated Server e com IL2CPP PENDENTE DE VERIFICAÇÃO (teste mínimo antes de construir em cima). |
 
 ## Como registrar decisões
 
