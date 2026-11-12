@@ -12,6 +12,7 @@
 | 2026-11-12 | PROPOSTA | Salvar dados dos personagens em SQLite no servidor (ainda não aprovado). |
 | 2026-11-12 | PENDENTE | Como os amigos vão se conectar ao servidor (definir depois). |
 | 2026-11-12 | DECISÃO TÉCNICA | Mirror versão 96.0.1 instalado via Asset Store em Assets/Mirror. Não mover a pasta do Mirror (facilita atualizações). |
+| 2026-11-12 | DECISÃO TÉCNICA | Testes locais com vários jogadores via Multiplayer Play Mode 2.0.2 (testado com Mirror: Host + Client). |
 
 ## Como registrar decisões
 
