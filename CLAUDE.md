@@ -30,7 +30,7 @@ parecer cyberpunk.
   aprovação.
 - Antes de implementar qualquer regra do MU, consulte
   docs/foundation/MU_099D_REFERENCE.md. Use só o que estiver marcado como
-  CONFIRMADO ou FONTE DA ÉPOCA. O que estiver PENDENTE vira valor
+  CONFIRMADO, FONTE DA ÉPOCA ou CONSENSO CLÁSSICO. O que estiver PENDENTE vira valor
   configurável com comentário 'PENDENTE DE VERIFICAÇÃO'. O que estiver
   marcado NÃO É 0.99D nunca deve ser implementado.
 

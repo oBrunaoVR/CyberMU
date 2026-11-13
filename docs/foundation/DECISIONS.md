@@ -28,6 +28,8 @@
 | 2026-11-12 | DECISÃO TÉCNICA | Scripts exclusivos do servidor que não devem ir para o build do jogador usam #if UNITY_SERVER \|\| UNITY_EDITOR. |
 | 2026-11-12 | DECISÃO TÉCNICA | ServerDatabase abre ServerData/cybermu.db ao iniciar o servidor e fecha ao parar; tabela SchemaInfo versão 1. |
 | 2026-11-12 | PENDENTE | Confirmar em um build do jogador que o Input System funciona (clique para mover) após aceitar a lista preloadedAssets vazia. |
+| 2026-11-12 | DECISÃO CONFIRMADA | Contas criadas automaticamente no primeiro login (no MU original eram criadas fora do jogo). Senha armazenada com hash e salt, nunca em texto puro. |
+| 2026-11-12 | PENDENTE | O Mirror não criptografa o tráfego: senha trafega sem criptografia. Resolver junto com a forma de conexão dos amigos (ex.: rede privada criptografada como Tailscale). |
 
 ## Como registrar decisões
 
