@@ -27,6 +27,7 @@
 | 2026-11-12 | DECISÃO TÉCNICA | Pasta Assets/_Project/Tests/ para testes automáticos (EditMode), que não entram no build. |
 | 2026-11-12 | DECISÃO TÉCNICA | Scripts exclusivos do servidor que não devem ir para o build do jogador usam #if UNITY_SERVER \|\| UNITY_EDITOR. |
 | 2026-11-12 | DECISÃO TÉCNICA | ServerDatabase abre ServerData/cybermu.db ao iniciar o servidor e fecha ao parar; tabela SchemaInfo versão 1. |
+| 2026-11-12 | PENDENTE | Confirmar em um build do jogador que o Input System funciona (clique para mover) após aceitar a lista preloadedAssets vazia. |
 
 ## Como registrar decisões
 
