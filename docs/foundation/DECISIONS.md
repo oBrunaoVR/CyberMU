@@ -20,6 +20,8 @@
 | 2026-11-12 | DECISÃO CONFIRMADA | Persistência em SQLite (arquivo único), acessado somente pelo servidor. Backup = cópia do arquivo. Migração para PostgreSQL só se o escopo crescer muito. |
 | 2026-11-12 | DECISÃO TÉCNICA | Biblioteca SQLite: SQLite-net for Unity (gilzoide/unity-sqlite-net, MIT). Ainda não instalada. Funcionamento no editor Unity 6.3, em build Windows Dedicated Server e com IL2CPP PENDENTE DE VERIFICAÇÃO (teste mínimo antes de construir em cima). |
 | 2026-11-12 | DECISÃO TÉCNICA | SQLite-net for Unity 1.3.3 instalado via Package Manager (git URL). Teste EditMode SqliteSmokeTest (gravar, fechar, reabrir, ler) passou no editor Unity 6.3. Build Windows Dedicated Server e IL2CPP continuam PENDENTES DE VERIFICAÇÃO. |
+| 2026-11-12 | DECISÃO TÉCNICA | SQLite verificado em build Windows Dedicated Server (x64, Mono): SqliteBuildCheck (argumento -sqliteCheck) gravou, reabriu e leu de volta; SQLite 3.53.4. IL2CPP continua PENDENTE DE VERIFICAÇÃO (módulo não instalado). |
+| 2026-11-12 | PENDENTE | Lista de cenas do build (EditorBuildSettings) aponta para Assets/Scenes/SampleScene.unity; corrigir antes do primeiro build do jogo. |
 
 ## Como registrar decisões
 
