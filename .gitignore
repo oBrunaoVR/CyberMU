@@ -72,3 +72,12 @@ crashlytics-build.properties
 .vscode/
 .DS_Store
 Thumbs.db
+
+# Banco de dados SQLite (dados reais do servidor nunca vão para o Git)
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+/ServerData/

@@ -1,3 +1,5 @@
+// Só existe no servidor dedicado e no editor; não entra no build do jogador.
+#if UNITY_SERVER || UNITY_EDITOR
 using System;
 using System.IO;
 using SQLite;
@@ -64,3 +66,4 @@ namespace CyberMU.Server.Diagnostics
         }
     }
 }
+#endif
