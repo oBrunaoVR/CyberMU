@@ -2,6 +2,7 @@
 #if UNITY_SERVER || UNITY_EDITOR
 using System;
 using System.IO;
+using CyberMU.Server.Characters;
 using SQLite;
 using UnityEngine;
 
@@ -20,8 +21,9 @@ namespace CyberMU.Server.Persistence
 
         // Versão atual da estrutura do banco. Sobe de número quando a estrutura
         // mudar no futuro (novas tabelas/colunas), para sabermos o que atualizar.
-        // Histórico: v1 = só SchemaInfo; v2 = tabela Accounts (contas).
-        public const int CurrentSchemaVersion = 2;
+        // Histórico: v1 = só SchemaInfo; v2 = tabela Accounts (contas);
+        // v3 = tabela Characters (personagens).
+        public const int CurrentSchemaVersion = 3;
 
         // Tabela com uma única linha (Id = 1) guardando a versão do banco.
         [Table("SchemaInfo")]
@@ -182,6 +184,13 @@ namespace CyberMU.Server.Persistence
                         LastLoginAt    TEXT    NULL
                     )");
                     connection.Execute("CREATE UNIQUE INDEX UX_Accounts_Name ON Accounts (Name COLLATE NOCASE)");
+                    break;
+
+                case 2:
+                    // v2 -> v3: tabela de personagens. O SQL fica no
+                    // CharacterSchema, que os testes também usam: a migração
+                    // e o banco de teste criam a mesma estrutura.
+                    CharacterSchema.Apply(connection);
                     break;
 
                 default:

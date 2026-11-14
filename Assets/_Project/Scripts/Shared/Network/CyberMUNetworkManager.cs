@@ -1,6 +1,7 @@
 using Mirror;
 #if UNITY_SERVER || UNITY_EDITOR
 using CyberMU.Server.Accounts;
+using CyberMU.Server.Characters;
 using CyberMU.Server.Persistence;
 #endif
 
@@ -21,6 +22,10 @@ namespace CyberMU.Shared.Network
 #if UNITY_SERVER || UNITY_EDITOR
             AccountService.ClearOnline();
             ServerDatabase.Open();
+            // Entrega a conexão do banco à caixa de personagens (ela não
+            // conhece o ServerDatabase). Se o banco não abriu, vai null e os
+            // pedidos de personagens respondem erro, sem derrubar o servidor.
+            CharacterMessageHandlers.Register(ServerDatabase.Connection);
 #endif
         }
 
@@ -29,6 +34,7 @@ namespace CyberMU.Shared.Network
         public override void OnStopServer()
         {
 #if UNITY_SERVER || UNITY_EDITOR
+            CharacterMessageHandlers.Unregister();
             AccountService.ClearOnline();
             ServerDatabase.Close();
 #endif

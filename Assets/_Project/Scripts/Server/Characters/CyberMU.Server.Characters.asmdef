@@ -1,0 +1,18 @@
+{
+    "name": "CyberMU.Server.Characters",
+    "rootNamespace": "CyberMU.Server.Characters",
+    "references": [
+        "Mirror",
+        "Gilzoide.SqliteNet",
+        "CyberMU.Shared.Characters"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
