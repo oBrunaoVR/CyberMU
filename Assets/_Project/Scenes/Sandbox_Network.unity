@@ -258,6 +258,7 @@ GameObject:
   - component: {fileID: 240561223}
   - component: {fileID: 240561222}
   - component: {fileID: 240561221}
+  - component: {fileID: 240561225}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -333,7 +334,7 @@ MonoBehaviour:
   maxConnections: 100
   disconnectInactiveConnections: 0
   disconnectInactiveTimeout: 60
-  authenticator: {fileID: 0}
+  authenticator: {fileID: 240561225}
   playerPrefab: {fileID: 3436547493059801766, guid: b27770b039ee76b439203b44ccc5bb2e, type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 1
@@ -368,6 +369,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &240561225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 240561220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 426a76288bcc0b84aabe27d00575b167, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CyberMU.Shared.Network.CyberMUAuthenticator
+  OnServerAuthenticated:
+    m_PersistentCalls:
+      m_Calls: []
+  OnClientAuthenticated:
+    m_PersistentCalls:
+      m_Calls: []
+  accountNameMinLength: 4
+  accountNameMaxLength: 10
+  passwordMinLength: 4
+  passwordMaxLength: 10
+  rejectDisconnectDelay: 3
 --- !u!1 &451262401
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,6 +480,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41f84591ce72545258ea98cb7518d8b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Mirror::Mirror.NetworkStartPosition
+--- !u!1 &807688826
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 807688828}
+  - component: {fileID: 807688827}
+  m_Layer: 0
+  m_Name: LoginScreen_Temp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &807688827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807688826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94f4a4b228d28cf46b5fac83e6dbb268, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CyberMU.Client.UI.LoginScreen
+  authenticator: {fileID: 240561225}
+--- !u!4 &807688828
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807688826}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &962257123
 GameObject:
   m_ObjectHideFlags: 0
@@ -843,3 +912,4 @@ SceneRoots:
   - {fileID: 962257127}
   - {fileID: 240561224}
   - {fileID: 1321481547}
+  - {fileID: 807688828}

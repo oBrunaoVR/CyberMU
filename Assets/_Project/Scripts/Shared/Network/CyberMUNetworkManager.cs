@@ -1,5 +1,6 @@
 using Mirror;
 #if UNITY_SERVER || UNITY_EDITOR
+using CyberMU.Server.Accounts;
 using CyberMU.Server.Persistence;
 #endif
 
@@ -18,6 +19,7 @@ namespace CyberMU.Shared.Network
         {
             base.OnStartServer();
 #if UNITY_SERVER || UNITY_EDITOR
+            AccountService.ClearOnline();
             ServerDatabase.Open();
 #endif
         }
@@ -27,9 +29,22 @@ namespace CyberMU.Shared.Network
         public override void OnStopServer()
         {
 #if UNITY_SERVER || UNITY_EDITOR
+            AccountService.ClearOnline();
             ServerDatabase.Close();
 #endif
             base.OnStopServer();
+        }
+
+        // Chamado no servidor sempre que uma conexão termina: saída normal,
+        // queda (timeout), recusa de login ou o host parando.
+        // Tira a conta da lista de "conectadas" e depois faz o padrão do
+        // Mirror (destruir a cápsula do jogador).
+        public override void OnServerDisconnect(NetworkConnectionToClient conn)
+        {
+#if UNITY_SERVER || UNITY_EDITOR
+            AccountService.MarkOffline(conn);
+#endif
+            base.OnServerDisconnect(conn);
         }
     }
 }

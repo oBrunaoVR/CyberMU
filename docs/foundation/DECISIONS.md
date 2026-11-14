@@ -30,6 +30,8 @@
 | 2026-11-12 | PENDENTE | Confirmar em um build do jogador que o Input System funciona (clique para mover) após aceitar a lista preloadedAssets vazia. |
 | 2026-11-12 | DECISÃO CONFIRMADA | Contas criadas automaticamente no primeiro login (no MU original eram criadas fora do jogo). Senha armazenada com hash e salt, nunca em texto puro. |
 | 2026-11-12 | PENDENTE | O Mirror não criptografa o tráfego: senha trafega sem criptografia. Resolver junto com a forma de conexão dos amigos (ex.: rede privada criptografada como Tailscale). |
+| 2026-11-14 | DECISÃO TÉCNICA | Login via Authenticator do Mirror; tabela Accounts; PBKDF2-SHA256 com salt (100.000 repetições, gravadas por conta); SchemaInfo v2; limites de conta/senha provisórios 4–10 caracteres, letras e números (PENDENTE DE VERIFICAÇÃO). Após recusa, o servidor espera 3 s antes de forçar a desconexão (com 1 s, cliente lento perdia a mensagem). |
+| 2026-11-14 | DECISÃO TÉCNICA | Regra para TODA atualização de estrutura do banco: antes de migrar um banco existente, criar cópia de segurança automática (ServerData/cybermu.v<versão antiga>.bak, via VACUUM INTO); se a cópia falhar, a migração não roda. |
 
 ## Como registrar decisões
 
