@@ -32,6 +32,7 @@
 | 2026-11-12 | PENDENTE | O Mirror não criptografa o tráfego: senha trafega sem criptografia. Resolver junto com a forma de conexão dos amigos (ex.: rede privada criptografada como Tailscale). |
 | 2026-11-14 | DECISÃO TÉCNICA | Login via Authenticator do Mirror; tabela Accounts; PBKDF2-SHA256 com salt (100.000 repetições, gravadas por conta); SchemaInfo v2; limites de conta/senha provisórios 4–10 caracteres, letras e números (PENDENTE DE VERIFICAÇÃO). Após recusa, o servidor espera 3 s antes de forçar a desconexão (com 1 s, cliente lento perdia a mensagem). |
 | 2026-11-14 | DECISÃO TÉCNICA | Regra para TODA atualização de estrutura do banco: antes de migrar um banco existente, criar cópia de segurança automática (ServerData/cybermu.v<versão antiga>.bak, via VACUUM INTO); se a cópia falhar, a migração não roda. |
+| 2026-11-14 | DECISÃO CONFIRMADA | Regra de nomes: jogador nunca vê nomes do MU; IDs neutros no código; nomes exibidos vêm de tabela; docs/foundation/NAMING.md faz a ponte. Nome "CyberMU" é provisório (pasta/projeto). |
 
 ## Como registrar decisões
 

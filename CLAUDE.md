@@ -34,6 +34,20 @@ parecer cyberpunk.
   configurável com comentário 'PENDENTE DE VERIFICAÇÃO'. O que estiver
   marcado NÃO É 0.99D nunca deve ser implementado.
 
+## Regra de nomes
+- O jogador NUNCA vê nomes do MU Online (classes, mapas, itens, joias,
+  monstros, NPCs, skills, eventos). Na tela, só nomes do projeto.
+- No código, cada coisa usa um identificador neutro e estável (ex.:
+  ClassId.Berserker). O texto exibido vem de uma tabela de nomes, para que
+  trocar um nome não exija mexer em lógica.
+- Os documentos de referência (MU_099D_REFERENCE.md) continuam usando os
+  nomes do MU, porque é isso que comprova a regra original.
+- Nenhum nome novo é inventado sem aprovação do dono do projeto. Se faltar
+  um nome, usar "[A DEFINIR]" e avisar.
+- A ponte entre os dois mundos (nome no MU -> ID no código -> nome exibido)
+  fica em docs/foundation/NAMING.md. Todo nome novo entra lá antes de
+  aparecer no jogo.
+
 ## Regras de arquitetura
 - O servidor é a autoridade final para inventário, drops, XP, combate, trade e
   tudo que é salvo. O cliente só envia pedidos e mostra o resultado.
