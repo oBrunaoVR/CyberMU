@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5376875340860995427}
   - component: {fileID: 848930891852219785}
   - component: {fileID: 5651762113441405363}
+  - component: {fileID: 4192125032692421920}
   m_Layer: 2
   m_Name: Player_Test
   m_TagString: Untagged
@@ -132,7 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Mirror::Mirror.NetworkIdentity
   sceneId: 0
-  _assetId: 2923670699
+  _assetId: 0
   serverOnly: 0
   visibility: 0
   hasSpawned: 0
@@ -228,3 +229,20 @@ MonoBehaviour:
   rotationSensitivity: 0.01
   positionPrecision: 0.01
   scalePrecision: 0.01
+--- !u!114 &4192125032692421920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3436547493059801766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0044b40c55e671f42a96a816be57ebd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CyberMU.Shared.Player.PlayerNameTag
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  heightAboveHead: 1.4
+  characterName: 

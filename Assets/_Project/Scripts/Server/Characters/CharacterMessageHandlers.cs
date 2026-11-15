@@ -49,7 +49,11 @@ namespace CyberMU.Server.Characters
         {
             if (db == null || !TryGetAccountId(conn, out int accountId))
             {
-                conn.Send(new CharacterListResponseMessage { characters = new CharacterSummary[0] });
+                conn.Send(new CharacterListResponseMessage
+                {
+                    characters = new CharacterSummary[0],
+                    unlockedClasses = new ClassId[0],
+                });
                 return;
             }
 
@@ -58,7 +62,11 @@ namespace CyberMU.Server.Characters
             for (int i = 0; i < records.Count; i++)
                 summaries[i] = ToSummary(records[i]);
 
-            conn.Send(new CharacterListResponseMessage { characters = summaries });
+            conn.Send(new CharacterListResponseMessage
+            {
+                characters = summaries,
+                unlockedClasses = CharacterService.GetUnlockedClasses(records).ToArray(),
+            });
         }
 
         private static void OnCreateRequest(NetworkConnectionToClient conn, CharacterCreateRequestMessage msg)
@@ -108,6 +116,7 @@ namespace CyberMU.Server.Characters
         {
             return new CharacterSummary
             {
+                id = r.Id,
                 slot = (byte)r.Slot,
                 name = r.Name,
                 classId = (ClassId)r.ClassId,

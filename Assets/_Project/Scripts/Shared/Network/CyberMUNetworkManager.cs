@@ -1,8 +1,10 @@
 using Mirror;
+using UnityEngine;
 #if UNITY_SERVER || UNITY_EDITOR
 using CyberMU.Server.Accounts;
 using CyberMU.Server.Characters;
 using CyberMU.Server.Persistence;
+using CyberMU.Server.World;
 #endif
 
 namespace CyberMU.Shared.Network
@@ -21,11 +23,14 @@ namespace CyberMU.Shared.Network
             base.OnStartServer();
 #if UNITY_SERVER || UNITY_EDITOR
             AccountService.ClearOnline();
+            ActiveCharacterRegistry.Clear();
             ServerDatabase.Open();
-            // Entrega a conexão do banco à caixa de personagens (ela não
-            // conhece o ServerDatabase). Se o banco não abriu, vai null e os
-            // pedidos de personagens respondem erro, sem derrubar o servidor.
+            // Entrega a conexão do banco às caixas de personagens e de
+            // entrada no mundo (elas não conhecem o ServerDatabase). Se o
+            // banco não abriu, vai null e os pedidos respondem erro, sem
+            // derrubar o servidor.
             CharacterMessageHandlers.Register(ServerDatabase.Connection);
+            EnterWorldHandler.Register(ServerDatabase.Connection);
 #endif
         }
 
@@ -34,8 +39,10 @@ namespace CyberMU.Shared.Network
         public override void OnStopServer()
         {
 #if UNITY_SERVER || UNITY_EDITOR
+            EnterWorldHandler.Unregister();
             CharacterMessageHandlers.Unregister();
             AccountService.ClearOnline();
+            ActiveCharacterRegistry.Clear();
             ServerDatabase.Close();
 #endif
             base.OnStopServer();
@@ -43,14 +50,24 @@ namespace CyberMU.Shared.Network
 
         // Chamado no servidor sempre que uma conexão termina: saída normal,
         // queda (timeout), recusa de login ou o host parando.
-        // Tira a conta da lista de "conectadas" e depois faz o padrão do
-        // Mirror (destruir a cápsula do jogador).
+        // Tira a conta da lista de "conectadas" e o personagem do registro
+        // "em uso", e depois faz o padrão do Mirror (destruir a cápsula).
         public override void OnServerDisconnect(NetworkConnectionToClient conn)
         {
 #if UNITY_SERVER || UNITY_EDITOR
+            ActiveCharacterRegistry.Remove(conn);
             AccountService.MarkOffline(conn);
 #endif
             base.OnServerDisconnect(conn);
+        }
+
+        // Chamado pelo Mirror quando um cliente envia o pedido ANTIGO de
+        // criação automática de jogador. Com a seleção de personagem, a única
+        // porta de entrada é a EnterWorldRequestMessage (EnterWorldHandler):
+        // um cliente alterado que mandar o pedido antigo não ganha cápsula.
+        public override void OnServerAddPlayer(NetworkConnectionToClient conn)
+        {
+            Debug.Log($"[World] Pedido automático de jogador ignorado (conexão {conn.connectionId}). A entrada é pela seleção de personagem.");
         }
     }
 }

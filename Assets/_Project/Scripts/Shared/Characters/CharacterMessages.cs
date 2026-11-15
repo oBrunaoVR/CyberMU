@@ -17,9 +17,21 @@ namespace CyberMU.Shared.Characters
         ServerError = 5,
     }
 
+    // Resultado do pedido de entrar no mundo, enviado pelo servidor.
+    public enum EnterWorldCode : byte
+    {
+        Accepted = 0,
+        InvalidCharacter = 1, // não existe ou não pertence a esta conta
+        AlreadyInWorld = 2,
+        ServerError = 3,
+    }
+
     // Resumo de um personagem para o cliente (sem dados internos do banco).
+    // O id é usado pelo cliente só para dizer "quero entrar com ESTE";
+    // o servidor sempre confere se o personagem é mesmo da conta.
     public struct CharacterSummary
     {
+        public int id;
         public byte slot;
         public string name;
         public ClassId classId;
@@ -29,10 +41,13 @@ namespace CyberMU.Shared.Characters
     // Cliente -> servidor: "quero a lista dos meus personagens".
     public struct CharacterListRequestMessage : NetworkMessage { }
 
-    // Servidor -> cliente: a lista de personagens da conta desta conexão.
+    // Servidor -> cliente: a lista de personagens da conta desta conexão e as
+    // classes desbloqueadas para criação. O SERVIDOR calcula o desbloqueio;
+    // o cliente só mostra (classe bloqueada fica escondida, como no original).
     public struct CharacterListResponseMessage : NetworkMessage
     {
         public CharacterSummary[] characters;
+        public ClassId[] unlockedClasses;
     }
 
     // Cliente -> servidor: pedido de criação. O cliente só manda nome e
@@ -49,5 +64,19 @@ namespace CyberMU.Shared.Characters
         public CharacterCreateCode code;
         public string message;
         public CharacterSummary character; // só preenchido quando aceito
+    }
+
+    // Cliente -> servidor: "quero entrar no mundo com este personagem".
+    public struct EnterWorldRequestMessage : NetworkMessage
+    {
+        public int characterId;
+    }
+
+    // Servidor -> cliente: só é útil na recusa (com texto para a tela).
+    // Quando aceito, o próprio nascimento da cápsula avisa o cliente.
+    public struct EnterWorldResponseMessage : NetworkMessage
+    {
+        public EnterWorldCode code;
+        public string message;
     }
 }

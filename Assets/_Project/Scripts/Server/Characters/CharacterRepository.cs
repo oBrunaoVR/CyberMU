@@ -19,6 +19,14 @@ namespace CyberMU.Server.Characters
                 "SELECT * FROM Characters WHERE AccountId = ? ORDER BY Slot", accountId);
         }
 
+        // Busca um personagem pelo Id. Devolve null se não existir.
+        public static CharacterRecord FindById(SQLiteConnection db, int id)
+        {
+            List<CharacterRecord> rows = db.Query<CharacterRecord>(
+                "SELECT * FROM Characters WHERE Id = ? LIMIT 1", id);
+            return rows.Count > 0 ? rows[0] : null;
+        }
+
         // SEM diferenciar maiúsculas (a coluna é COLLATE NOCASE) e em
         // QUALQUER conta: o nome é único no servidor inteiro.
         public static bool NameExists(SQLiteConnection db, string name)

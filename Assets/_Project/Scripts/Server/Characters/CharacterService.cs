@@ -27,6 +27,30 @@ namespace CyberMU.Server.Characters
             return CharacterRepository.ListByAccount(db, accountId);
         }
 
+        // Classes que esta conta pode criar AGORA (mesma regra usada na
+        // criação). O servidor manda esta lista ao cliente; o cliente só
+        // mostra, nunca decide.
+        public static List<ClassId> GetUnlockedClasses(List<CharacterRecord> existing)
+        {
+            var unlocked = new List<ClassId>();
+            foreach (ClassDefinition def in ClassCatalog.All)
+            {
+                if (IsClassUnlocked(def, existing))
+                    unlocked.Add(def.Id);
+            }
+            return unlocked;
+        }
+
+        // Busca um personagem pelo Id SOMENTE se pertencer à conta dada.
+        // Devolve null se não existir ou se for de outra conta (o chamador
+        // não precisa distinguir: para o cliente é "personagem inválido").
+        public static CharacterRecord FindOwned(SQLiteConnection db, int accountId, int characterId)
+        {
+            CharacterRecord record = CharacterRepository.FindById(db, characterId);
+            if (record == null || record.AccountId != accountId) return null;
+            return record;
+        }
+
         public static CharacterCreateResult Create(
             SQLiteConnection db, int accountId, string name, ClassId classId, CharacterNameRules nameRules)
         {
