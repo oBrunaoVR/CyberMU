@@ -99,6 +99,18 @@ Regra: só implementar como regra do jogo o que estiver CONFIRMADO, FONTE DA ÉP
 ### Vida/Mana iniciais e por nível
 - PENDENTE DE VERIFICAÇÃO. Fontes divergem entre versões (ex.: DK HP 110/Mana 20 no site oficial atual vs. 90/40 na StrategyWiki; DW 60/60). Não implementar valores fixos ainda.
 
+## 7. Experiência e nível
+| Regra | Valor | Status | Fonte |
+|---|---|---|---|
+| EXP total para passar do nível N para N+1 (N até 255) | (N + 9) × N × N × 10 | CONSENSO CLÁSSICO | FAQ de 2006 (Cheating World, fórmula do servidor da época); RageZone (2017); muonlinefanz |
+| EXP para N acima de 255 | [(N−255)+9] × (N−255) × (N−255) × 1000 + (N+9) × N × N × 10 | FONTE DA ÉPOCA | FAQ de 2006 (Cheating World) |
+| Interpretação | A EXP é acumulada (total). O personagem no nível N sobe quando a EXP total ≥ fórmula(N). Ex.: nível 1 sobe com 100 de EXP total. | DECISÃO TÉCNICA (revisar se surgir fonte melhor) | — |
+| Nível máximo | 400 | PENDENTE DE VERIFICAÇÃO para a 0.99D (CONSENSO em guias clássicos) | muonlinefanz ("Level 1 ~ Level 400"); guias de BK |
+| Pontos ao subir de nível | DK/DW/Elf: 5; MG e DL: 7 | ver seção 6 | — |
+| Vários níveis de uma vez | Se a EXP recebida ultrapassar mais de um nível, sobe todos e soma os pontos | DECISÃO TÉCNICA (comportamento natural da fórmula acumulada) | — |
+| Limite de cada atributo | 32767 | CONSENSO CLÁSSICO | Old School MU tutorial |
+| EXP ganha por monstro, party, perda de EXP ao morrer | — | PENDENTE (Fase 4) | — |
+
 ## Fontes
 - GameFAQs — MU Online FAQ by mysterio619_ (v0.99x, atualizada 22/10/2005): https://gamefaqs.gamespot.com/pc/919061-mu-online/faqs/35501
 - StrategyWiki — Mu Online/Controls: https://strategywiki.org/wiki/Mu_Online/Controls
@@ -109,3 +121,7 @@ Regra: só implementar como regra do jogo o que estiver CONFIRMADO, FONTE DA ÉP
 - muonline.us — Season 1 guide: https://muonline.us/guides/season-1.html
 - muonline.net — 97d, 99i & Season 1: https://muonline.net/guides/mu-online-season-1/
 - InfinityMU — Multi-Character System: https://wiki.infinitymu.net/index.php?title=Multi-Character_System
+- Cheating World — "A big FAQ in Mu" (fórmula de EXP, ~2006): https://www.tapatalk.com/groups/cheatingworld/a-big-faq-in-mu-included-how-to-change-max-lvl-t173.html
+- RageZone — "Fix level formula on GameServer": https://forum.ragezone.com/threads/fix-level-formula-on-gameserver.1147659/
+- muonlinefanz — Combat Mechanics: https://muonlinefanz.com/guide/systems/combat-mechanics/
+- Old School MU — Tutorial: https://oldschoolmuonline.freeforums.net/thread/93/mu-online-tutorial
