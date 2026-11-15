@@ -6,9 +6,11 @@ using UnityEngine.InputSystem;
 namespace CyberMU.Client.UI
 {
     // JANELA DO PERSONAGEM TEMPORÁRIA (tecla C, como no original).
-    // Somente leitura: mostra o que o SERVIDOR enviou (CharacterStatsMessage,
-    // entregue só ao dono na entrada no mundo). O cliente não calcula nem
-    // altera nada; sem botões de distribuir pontos por enquanto.
+    // Mostra o que o SERVIDOR enviou (CharacterStatsMessage, entregue só ao
+    // dono). O cliente não calcula nem altera nada: o botão + só envia QUAL
+    // atributo aumentar; validação, quantidade e o novo valor vêm do servidor.
+    // PENDÊNCIA JÁ REGISTRADA: o clique no + também atravessa a janela e
+    // move o personagem (como todo clique sobre esta janela temporária).
     [AddComponentMenu("CyberMU/Character Info Window (temporária)")]
     public class CharacterInfoWindow : MonoBehaviour
     {
@@ -51,7 +53,7 @@ namespace CyberMU.Client.UI
             if (!open || !InWorld()) return;
 
             const float width = 260f;
-            const float height = 330f;
+            const float height = 360f;
             var area = new Rect(16f, (Screen.height - height) / 2f, width, height);
 
             GUILayout.BeginArea(area, GUI.skin.box);
@@ -74,16 +76,27 @@ namespace CyberMU.Client.UI
                 ? $"Próximo nível: {stats.experienceForNextLevel:N0}"
                 : "Próximo nível: —");
             GUILayout.Space(6f);
-            GUILayout.Label($"Força: {stats.strength}");
-            GUILayout.Label($"Agilidade: {stats.agility}");
-            GUILayout.Label($"Vitalidade: {stats.vitality}");
-            GUILayout.Label($"Energia: {stats.energy}");
+            StatRow("Força", stats.strength, StatId.Strength);
+            StatRow("Agilidade", stats.agility, StatId.Agility);
+            StatRow("Vitalidade", stats.vitality, StatId.Vitality);
+            StatRow("Energia", stats.energy, StatId.Energy);
             if (stats.classId == ClassId.Overlord)
-                GUILayout.Label($"Comando: {stats.command}");
+                StatRow("Comando", stats.command, StatId.Command);
             GUILayout.Space(6f);
             GUILayout.Label($"Pontos disponíveis: {stats.levelUpPoints}");
 
             GUILayout.EndArea();
+        }
+
+        // Uma linha de atributo. O botão + só APARECE quando há pontos
+        // disponíveis; o clique envia só o atributo e espera a ficha nova.
+        private void StatRow(string label, int value, StatId stat)
+        {
+            GUILayout.BeginHorizontal();
+            GUILayout.Label($"{label}: {value}");
+            if (stats.levelUpPoints > 0 && GUILayout.Button("+", GUILayout.Width(24f)))
+                NetworkClient.Send(new IncreaseStatRequestMessage { stat = stat });
+            GUILayout.EndHorizontal();
         }
 
         private void OnStats(CharacterStatsMessage msg)

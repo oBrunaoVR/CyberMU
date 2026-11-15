@@ -101,6 +101,15 @@ namespace CyberMU.Shared.Characters
         public long experienceForNextLevel; // 0 = está no nível máximo
     }
 
+    // Cliente -> servidor: "quero 1 ponto no atributo X" (botão + da janela
+    // C). Leva SÓ o atributo: a quantidade por clique é decidida no servidor
+    // (StatPointService) e toda a validação também. Registrada com
+    // autenticação exigida, como as outras.
+    public struct IncreaseStatRequestMessage : NetworkMessage
+    {
+        public StatId stat;
+    }
+
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
     // COMANDO DE DESENVOLVEDOR. Cliente -> servidor: "me dê EXP de teste"
     // (tecla F9). VAZIA de propósito: quantidade, nível e pontos são

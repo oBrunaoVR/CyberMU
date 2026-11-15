@@ -31,6 +31,7 @@ namespace CyberMU.Shared.Network
             // derrubar o servidor.
             CharacterMessageHandlers.Register(ServerDatabase.Connection);
             EnterWorldHandler.Register(ServerDatabase.Connection);
+            StatPointHandler.Register(ServerDatabase.Connection);
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
             // Comando de desenvolvedor (F9 = EXP de teste): só existe no
             // editor e em build de desenvolvimento. Num servidor normal este
@@ -48,6 +49,7 @@ namespace CyberMU.Shared.Network
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
             DevExperienceCommand.Unregister();
 #endif
+            StatPointHandler.Unregister();
             EnterWorldHandler.Unregister();
             CharacterMessageHandlers.Unregister();
             AccountService.ClearOnline();

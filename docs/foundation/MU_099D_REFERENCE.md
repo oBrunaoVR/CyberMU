@@ -109,6 +109,7 @@ Regra: só implementar como regra do jogo o que estiver CONFIRMADO, FONTE DA ÉP
 | Pontos ao subir de nível | DK/DW/Elf: 5; MG e DL: 7 | ver seção 6 | — |
 | Vários níveis de uma vez | Se a EXP recebida ultrapassar mais de um nível, sobe todos e soma os pontos | DECISÃO TÉCNICA (comportamento natural da fórmula acumulada) | — |
 | Limite de cada atributo | 32767 | CONSENSO CLÁSSICO | Old School MU tutorial |
+| Distribuição de pontos | Botão + na janela C; quantidade por clique PENDENTE (projeto usa 1, configurável); comandos de texto (/f, /a...) NÃO são do original (criação de servidores privados) | PENDENTE (quantidade) / NÃO É 0.99D (comandos de texto) | — |
 | EXP ganha por monstro, party, perda de EXP ao morrer | — | PENDENTE (Fase 4) | — |
 
 ## Fontes

@@ -56,6 +56,19 @@ namespace CyberMU.Server.Characters
                 c.Level, c.Experience, c.LevelUpPoints, c.Id);
         }
 
+        // Grava os atributos e os pontos disponíveis (e SÓ eles): é o que a
+        // distribuição de pontos muda. Nível e EXP ficam no SaveProgress.
+        // Os dois UPDATEs gravam LevelUpPoints, mas nunca brigam: ambos os
+        // serviços alteram o MESMO CharacterRecord em memória antes de salvar.
+        public static void SaveStats(SQLiteConnection db, CharacterRecord c)
+        {
+            db.Execute(
+                @"UPDATE Characters SET Strength = ?, Agility = ?, Vitality = ?,
+                  Energy = ?, Command = ?, LevelUpPoints = ? WHERE Id = ?",
+                c.Strength, c.Agility, c.Vitality, c.Energy, c.Command,
+                c.LevelUpPoints, c.Id);
+        }
+
         // Mesmo formato de data da tabela Accounts (ISO 8601, UTC).
         public static string NowText() =>
             DateTime.UtcNow.ToString("yyyy-MM-dd'T'HH:mm:ss'Z'", CultureInfo.InvariantCulture);
