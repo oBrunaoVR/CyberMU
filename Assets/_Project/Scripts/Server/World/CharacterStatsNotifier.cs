@@ -26,6 +26,11 @@ namespace CyberMU.Server.World
                 energy = character.Energy,
                 command = character.Command,
                 levelUpPoints = character.LevelUpPoints,
+                experience = character.Experience,
+                // No nível máximo vai 0 (o cliente mostra "—").
+                experienceForNextLevel = character.Level >= ExperienceRules.MaxLevel
+                    ? 0
+                    : ExperienceRules.TotalExperienceToLevelUp(character.Level),
             });
         }
     }

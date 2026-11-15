@@ -102,7 +102,7 @@ Regra: só implementar como regra do jogo o que estiver CONFIRMADO, FONTE DA ÉP
 ## 7. Experiência e nível
 | Regra | Valor | Status | Fonte |
 |---|---|---|---|
-| EXP total para passar do nível N para N+1 (N até 255) | (N + 9) × N × N × 10 | CONSENSO CLÁSSICO | FAQ de 2006 (Cheating World, fórmula do servidor da época); RageZone (2017); muonlinefanz |
+| EXP total para passar do nível N para N+1 (N até 255) | (N + 9) × N × N × 10 | CONSENSO CLÁSSICO | FAQ de 2006 (Cheating World, fórmula do servidor da época); RageZone (2017); muonlinefanz. Atenção: o exemplo numérico do tópico da RageZone (6.023.708 para o nível 179) omite o ×10; o valor correto pela fórmula é 60.237.080. |
 | EXP para N acima de 255 | [(N−255)+9] × (N−255) × (N−255) × 1000 + (N+9) × N × N × 10 | FONTE DA ÉPOCA | FAQ de 2006 (Cheating World) |
 | Interpretação | A EXP é acumulada (total). O personagem no nível N sobe quando a EXP total ≥ fórmula(N). Ex.: nível 1 sobe com 100 de EXP total. | DECISÃO TÉCNICA (revisar se surgir fonte melhor) | — |
 | Nível máximo | 400 | PENDENTE DE VERIFICAÇÃO para a 0.99D (CONSENSO em guias clássicos) | muonlinefanz ("Level 1 ~ Level 400"); guias de BK |

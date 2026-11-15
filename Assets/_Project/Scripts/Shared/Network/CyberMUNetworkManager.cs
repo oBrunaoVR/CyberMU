@@ -31,6 +31,12 @@ namespace CyberMU.Shared.Network
             // derrubar o servidor.
             CharacterMessageHandlers.Register(ServerDatabase.Connection);
             EnterWorldHandler.Register(ServerDatabase.Connection);
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+            // Comando de desenvolvedor (F9 = EXP de teste): só existe no
+            // editor e em build de desenvolvimento. Num servidor normal este
+            // registro não é compilado e o pedido é descartado pelo Mirror.
+            DevExperienceCommand.Register(ServerDatabase.Connection);
+#endif
 #endif
         }
 
@@ -39,6 +45,9 @@ namespace CyberMU.Shared.Network
         public override void OnStopServer()
         {
 #if UNITY_SERVER || UNITY_EDITOR
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+            DevExperienceCommand.Unregister();
+#endif
             EnterWorldHandler.Unregister();
             CharacterMessageHandlers.Unregister();
             AccountService.ClearOnline();

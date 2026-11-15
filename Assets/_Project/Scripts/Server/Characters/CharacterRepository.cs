@@ -46,6 +46,16 @@ namespace CyberMU.Server.Characters
             return (int)db.ExecuteScalar<long>("SELECT last_insert_rowid()");
         }
 
+        // Grava o progresso de experiência (e SÓ ele): nível, EXP total e
+        // pontos disponíveis. Os atributos (Força etc.) não entram aqui de
+        // propósito — a distribuição de pontos é o próximo passo.
+        public static void SaveProgress(SQLiteConnection db, CharacterRecord c)
+        {
+            db.Execute(
+                "UPDATE Characters SET Level = ?, Experience = ?, LevelUpPoints = ? WHERE Id = ?",
+                c.Level, c.Experience, c.LevelUpPoints, c.Id);
+        }
+
         // Mesmo formato de data da tabela Accounts (ISO 8601, UTC).
         public static string NowText() =>
             DateTime.UtcNow.ToString("yyyy-MM-dd'T'HH:mm:ss'Z'", CultureInfo.InvariantCulture);

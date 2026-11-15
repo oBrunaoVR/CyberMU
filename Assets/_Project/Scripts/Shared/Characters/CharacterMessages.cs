@@ -95,5 +95,18 @@ namespace CyberMU.Shared.Characters
         public int energy;
         public int command;       // só tem significado para Overlord
         public int levelUpPoints; // pontos disponíveis para distribuir
+
+        // Calculados pelo SERVIDOR (ExperienceRules); o cliente só mostra.
+        public long experience;             // EXP total acumulada
+        public long experienceForNextLevel; // 0 = está no nível máximo
     }
+
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+    // COMANDO DE DESENVOLVEDOR. Cliente -> servidor: "me dê EXP de teste"
+    // (tecla F9). VAZIA de propósito: quantidade, nível e pontos são
+    // decididos SÓ pelo servidor. Esta mensagem só é compilada no editor e
+    // em build de desenvolvimento: numa build normal ela não existe no
+    // executável, nem para enviar nem para receber.
+    public struct DevGrantExperienceRequestMessage : NetworkMessage { }
+#endif
 }

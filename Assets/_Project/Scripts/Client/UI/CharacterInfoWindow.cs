@@ -51,7 +51,7 @@ namespace CyberMU.Client.UI
             if (!open || !InWorld()) return;
 
             const float width = 260f;
-            const float height = 280f;
+            const float height = 330f;
             var area = new Rect(16f, (Screen.height - height) / 2f, width, height);
 
             GUILayout.BeginArea(area, GUI.skin.box);
@@ -67,6 +67,12 @@ namespace CyberMU.Client.UI
             GUILayout.Label($"Nome: {stats.name}");
             GUILayout.Label($"Classe: {ClassNames.GetDisplayName(stats.classId)}");
             GUILayout.Label($"Nível: {stats.level}");
+            // Os dois valores vêm prontos do servidor; 0 em
+            // experienceForNextLevel significa nível máximo.
+            GUILayout.Label($"EXP: {stats.experience:N0}");
+            GUILayout.Label(stats.experienceForNextLevel > 0
+                ? $"Próximo nível: {stats.experienceForNextLevel:N0}"
+                : "Próximo nível: —");
             GUILayout.Space(6f);
             GUILayout.Label($"Força: {stats.strength}");
             GUILayout.Label($"Agilidade: {stats.agility}");
