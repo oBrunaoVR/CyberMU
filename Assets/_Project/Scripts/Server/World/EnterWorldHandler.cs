@@ -102,6 +102,10 @@ namespace CyberMU.Server.World
             ActiveCharacterRegistry.Set(conn, character);
             NetworkServer.AddPlayerForConnection(conn, player);
             conn.Send(new EnterWorldResponseMessage { code = EnterWorldCode.Accepted, message = "Entrou no mundo" });
+
+            // Atributos vão SÓ para o dono (conn.Send); os outros jogadores
+            // continuam recebendo apenas o nome, pela SyncVar do PlayerNameTag.
+            CharacterStatsNotifier.SendToOwner(conn, character);
         }
 
         private static void Refuse(NetworkConnectionToClient conn, EnterWorldCode code, string message)

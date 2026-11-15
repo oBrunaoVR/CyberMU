@@ -79,4 +79,21 @@ namespace CyberMU.Shared.Characters
         public EnterWorldCode code;
         public string message;
     }
+
+    // Servidor -> cliente: atributos do personagem, enviados SOMENTE ao dono
+    // (conn.Send entrega só àquela conexão). Os outros jogadores nunca recebem
+    // isto: deles, só o nome chega, pela SyncVar do PlayerNameTag.
+    // Sem Id interno nem AccountId: o cliente não precisa de dados do banco.
+    public struct CharacterStatsMessage : NetworkMessage
+    {
+        public string name;
+        public ClassId classId; // o cliente converte em nome exibido (NAMING.md)
+        public int level;
+        public int strength;
+        public int agility;
+        public int vitality;
+        public int energy;
+        public int command;       // só tem significado para Overlord
+        public int levelUpPoints; // pontos disponíveis para distribuir
+    }
 }
