@@ -52,6 +52,7 @@ namespace CyberMU.Client.UI
             const float width = 260f;
             const float height = 150f;
             var area = new Rect((Screen.width - width) / 2f, (Screen.height - height) / 2f, width, height);
+            UiHotspots.Report(area); // clique aqui não deve virar movimento
 
             GUILayout.BeginArea(area, GUI.skin.box);
             GUILayout.Label("Login (temporário)");

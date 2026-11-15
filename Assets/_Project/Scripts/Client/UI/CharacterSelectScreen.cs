@@ -72,6 +72,7 @@ namespace CyberMU.Client.UI
             const float width = 360f;
             const float height = 400f;
             var area = new Rect((Screen.width - width) / 2f, (Screen.height - height) / 2f, width, height);
+            UiHotspots.Report(area); // clique aqui não deve virar movimento
 
             GUILayout.BeginArea(area, GUI.skin.box);
             GUILayout.Label("Seleção de personagem (temporária)");

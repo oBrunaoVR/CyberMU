@@ -1,3 +1,4 @@
+using CyberMU.Client.UI;
 using Mirror;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -27,10 +28,16 @@ public class ClientClickToMove : NetworkBehaviour
         Mouse mouse = Mouse.current;
         if (mouse == null || !mouse.leftButton.wasPressedThisFrame) return;
 
+        Vector2 mousePosition = mouse.position.ReadValue();
+
+        // Clique sobre uma janela da interface pertence à interface:
+        // não vira movimento (áreas registradas em UiHotspots).
+        if (UiHotspots.IsMouseOver(mousePosition)) return;
+
         Camera cam = Camera.main;
         if (cam == null) return;
 
-        Ray ray = cam.ScreenPointToRay(mouse.position.ReadValue());
+        Ray ray = cam.ScreenPointToRay(mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit, maxRayDistance, clickableLayers))
         {
             mover.CmdRequestMove(hit.point);

@@ -9,8 +9,8 @@ namespace CyberMU.Client.UI
     // Mostra o que o SERVIDOR enviou (CharacterStatsMessage, entregue só ao
     // dono). O cliente não calcula nem altera nada: o botão + só envia QUAL
     // atributo aumentar; validação, quantidade e o novo valor vêm do servidor.
-    // PENDÊNCIA JÁ REGISTRADA: o clique no + também atravessa a janela e
-    // move o personagem (como todo clique sobre esta janela temporária).
+    // A janela registra sua área em UiHotspots: clique sobre ela não vira
+    // movimento (ClientClickToMove consulta antes de enviar o destino).
     [AddComponentMenu("CyberMU/Character Info Window (temporária)")]
     public class CharacterInfoWindow : MonoBehaviour
     {
@@ -55,6 +55,7 @@ namespace CyberMU.Client.UI
             const float width = 260f;
             const float height = 360f;
             var area = new Rect(16f, (Screen.height - height) / 2f, width, height);
+            UiHotspots.Report(area); // clique aqui não deve virar movimento
 
             GUILayout.BeginArea(area, GUI.skin.box);
             GUILayout.Label("Personagem (temporária) — C fecha");
