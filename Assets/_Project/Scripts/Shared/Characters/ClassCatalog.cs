@@ -22,6 +22,21 @@ namespace CyberMU.Shared.Characters
         // da conta precisa ter para desbloquear a criação.
         public int UnlockAccountLevel;
 
+        // Quais classes contam para o desbloqueio acima. null = qualquer
+        // classe da conta conta (ex.: Overlord, "personagem de nível 250").
+        public ClassId[] UnlockQualifyingClasses;
+
+        // true = um personagem desta classe conta para o desbloqueio.
+        public bool CountsForUnlock(ClassId classId)
+        {
+            if (UnlockQualifyingClasses == null) return true;
+            foreach (ClassId id in UnlockQualifyingClasses)
+            {
+                if (id == classId) return true;
+            }
+            return false;
+        }
+
         // Só o Overlord tem o atributo Comando.
         public bool HasCommand;
 
@@ -95,8 +110,9 @@ namespace CyberMU.Shared.Characters
                 ManaBase = 7.5f, ManaPerLevel = 1.5f, ManaPerEnergy = 1.5f,
                 VitalsConfirmed = true,
             },
-            // FONTE DA ÉPOCA: desbloqueia quando um personagem da conta passa
-            // do nível 220 (ou seja, nível 221 ou mais).
+            // FONTE DA ÉPOCA (seção 6): desbloqueia quando um DK, DW ou Elf
+            // (Berserker, Technomancer, NeonRanger) da MESMA conta passa do
+            // nível 220 (ou seja, nível 221 ou mais). Outras classes não contam.
             // Atributos iniciais PENDENTES DE VERIFICAÇÃO -> criação bloqueada.
             // Vida/Mana (seção 8): bases 58/8 derivadas supondo os atributos
             // de criação 26/26/26/26 — Energia inicial PENDENTE (26 ou 16);
@@ -107,12 +123,17 @@ namespace CyberMU.Shared.Characters
                 PointsPerLevel = 7,
                 CreatableAtStart = false,
                 UnlockAccountLevel = 221,
+                UnlockQualifyingClasses = new[]
+                {
+                    ClassId.Berserker, ClassId.Technomancer, ClassId.NeonRanger,
+                },
                 InitialStatsConfirmed = false,
                 HealthBase = 58f, HealthPerLevel = 1f, HealthPerVitality = 2f,
                 ManaBase = 8f, ManaPerLevel = 1f, ManaPerEnergy = 2f,
                 VitalsConfirmed = true,
             },
-            // FONTE DA ÉPOCA: desbloqueia com personagem da conta de nível 250+.
+            // FONTE DA ÉPOCA: desbloqueia com personagem da conta de nível 250+
+            // (a fonte não limita a classe: UnlockQualifyingClasses = null).
             // Atributos iniciais (inclusive Comando) PENDENTES DE VERIFICAÇÃO
             // -> criação bloqueada.
             // Vida/Mana (seção 8): PENDENTES (sem valores; classe bloqueada).

@@ -148,6 +148,40 @@ namespace CyberMU.Tests.EditMode
             Assert.AreEqual(CharacterCreateCode.ClassLocked, unknown.Code);
         }
 
+        // (e2) Requisito de conta (seção 6): para o Ronin só contam Berserker,
+        // Technomancer e NeonRanger de nível 221+; para o Overlord, qualquer
+        // classe de nível 250+. Testa só o requisito, sem os atributos
+        // iniciais (que hoje bloqueiam as duas classes de qualquer jeito).
+        [Test]
+        public void RequisitoDeDesbloqueioContaSoAsClassesCertas()
+        {
+            Assert.IsTrue(ClassCatalog.TryGet(ClassId.Ronin, out ClassDefinition ronin));
+            Assert.IsTrue(ClassCatalog.TryGet(ClassId.Overlord, out ClassDefinition overlord));
+
+            // Ronin: 221+ das três classes iniciais conta; 220 não.
+            Assert.IsTrue(CharacterService.MeetsUnlockRequirement(ronin, Account(ClassId.Berserker, 221)));
+            Assert.IsTrue(CharacterService.MeetsUnlockRequirement(ronin, Account(ClassId.Technomancer, 221)));
+            Assert.IsTrue(CharacterService.MeetsUnlockRequirement(ronin, Account(ClassId.NeonRanger, 221)));
+            Assert.IsFalse(CharacterService.MeetsUnlockRequirement(ronin, Account(ClassId.Berserker, 220)));
+
+            // Ronin: Ronin ou Overlord de nível alto NÃO contam.
+            Assert.IsFalse(CharacterService.MeetsUnlockRequirement(ronin, Account(ClassId.Ronin, 400)));
+            Assert.IsFalse(CharacterService.MeetsUnlockRequirement(ronin, Account(ClassId.Overlord, 400)));
+
+            // Overlord: qualquer classe de nível 250+ conta; 249 não.
+            Assert.IsTrue(CharacterService.MeetsUnlockRequirement(overlord, Account(ClassId.Ronin, 250)));
+            Assert.IsTrue(CharacterService.MeetsUnlockRequirement(overlord, Account(ClassId.Berserker, 250)));
+            Assert.IsFalse(CharacterService.MeetsUnlockRequirement(overlord, Account(ClassId.Berserker, 249)));
+        }
+
+        private static List<CharacterRecord> Account(ClassId classId, int level)
+        {
+            return new List<CharacterRecord>
+            {
+                new CharacterRecord { AccountId = Account1, ClassId = (int)classId, Level = level },
+            };
+        }
+
         // (f) Cada conta só vê os próprios personagens.
         [Test]
         public void ContasNaoVeemPersonagensUmaDaOutra()

@@ -116,11 +116,20 @@ namespace CyberMU.Server.Characters
             // Atributos iniciais PENDENTES -> criação bloqueada, mesmo que a
             // conta cumpra o requisito de nível (não inventar valores).
             if (!def.InitialStatsConfirmed) return false;
+            return MeetsUnlockRequirement(def, existing);
+        }
+
+        // Só o requisito de conta (seção 6): algum personagem de uma classe
+        // que conta (UnlockQualifyingClasses) com nível suficiente.
+        // Separado para poder ser testado sem depender dos atributos iniciais.
+        public static bool MeetsUnlockRequirement(ClassDefinition def, List<CharacterRecord> existing)
+        {
             if (def.CreatableAtStart) return true;
 
             foreach (CharacterRecord c in existing)
             {
-                if (c.Level >= def.UnlockAccountLevel) return true;
+                if (c.Level >= def.UnlockAccountLevel && def.CountsForUnlock((ClassId)c.ClassId))
+                    return true;
             }
             return false;
         }
