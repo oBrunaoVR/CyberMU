@@ -114,9 +114,11 @@ namespace CyberMU.Shared.Characters
             // (Berserker, Technomancer, NeonRanger) da MESMA conta passa do
             // nível 220 (ou seja, nível 221 ou mais). Outras classes não contam.
             // Atributos iniciais PENDENTES DE VERIFICAÇÃO -> criação bloqueada.
-            // Vida/Mana (seção 8): bases 58/8 derivadas supondo os atributos
-            // de criação 26/26/26/26 — Energia inicial PENDENTE (26 ou 16);
-            // a classe segue bloqueada até decidir.
+            // Vida/Mana (seção 8, CONSENSO CLÁSSICO): as fórmulas por nível e
+            // por ponto e a Base de Mana 8 vêm direto da fórmula citada
+            // (Mana = 8 + (Nv−1) + Ene×2). O que depende da Energia inicial
+            // PENDENTE (26 ou 16) é só a Mana na criação; a classe segue
+            // bloqueada até decidir.
             new ClassDefinition
             {
                 Id = ClassId.Ronin,

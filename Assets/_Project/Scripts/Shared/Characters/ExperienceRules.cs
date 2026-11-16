@@ -7,7 +7,8 @@ namespace CyberMU.Shared.Characters
     public static class ExperienceRules
     {
         // PENDENTE DE VERIFICAÇÃO para a 0.99D (CONSENSO em guias clássicos).
-        // No nível máximo o personagem não ganha mais EXP.
+        // No nível máximo o personagem não ganha mais EXP: DECISÃO TÉCNICA
+        // (DECISIONS.md) — PENDENTE DE VERIFICAÇÃO, não vem da referência.
         public const int MaxLevel = 400;
 
         // EXP TOTAL acumulada que o personagem precisa ter para sair do

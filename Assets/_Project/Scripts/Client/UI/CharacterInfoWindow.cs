@@ -77,15 +77,26 @@ namespace CyberMU.Client.UI
                 ? $"Próximo nível: {stats.experienceForNextLevel:N0}"
                 : "Próximo nível: —");
             // Valores calculados no servidor; hoje atual = máxima (sem dano
-            // nem gasto de mana ainda).
-            GUILayout.Label($"Vida: {stats.currentHealth} / {stats.maxHealth}");
-            GUILayout.Label($"Mana: {stats.currentMana} / {stats.maxMana}");
+            // nem gasto de mana ainda). Classe com Vida/Mana PENDENTES mostra
+            // "[A DEFINIR]" em vez de um 0 que pareceria valor real.
+            if (stats.vitalsPending)
+            {
+                GUILayout.Label("Vida: [A DEFINIR]");
+                GUILayout.Label("Mana: [A DEFINIR]");
+            }
+            else
+            {
+                GUILayout.Label($"Vida: {stats.currentHealth} / {stats.maxHealth}");
+                GUILayout.Label($"Mana: {stats.currentMana} / {stats.maxMana}");
+            }
             GUILayout.Space(6f);
             StatRow("Força", stats.strength, StatId.Strength);
             StatRow("Agilidade", stats.agility, StatId.Agility);
             StatRow("Vitalidade", stats.vitality, StatId.Vitality);
             StatRow("Energia", stats.energy, StatId.Energy);
-            if (stats.classId == ClassId.Overlord)
+            // Mesma regra do servidor (StatPointService): só a classe com
+            // HasCommand no ClassCatalog mostra Comando.
+            if (ClassCatalog.TryGet(stats.classId, out ClassDefinition classDef) && classDef.HasCommand)
                 StatRow("Comando", stats.command, StatId.Command);
             GUILayout.Space(6f);
             GUILayout.Label($"Pontos disponíveis: {stats.levelUpPoints}");

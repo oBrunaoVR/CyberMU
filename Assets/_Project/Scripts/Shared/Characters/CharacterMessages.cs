@@ -43,7 +43,8 @@ namespace CyberMU.Shared.Characters
 
     // Servidor -> cliente: a lista de personagens da conta desta conexão e as
     // classes desbloqueadas para criação. O SERVIDOR calcula o desbloqueio;
-    // o cliente só mostra (classe bloqueada fica escondida, como no original).
+    // o cliente só mostra. Classe bloqueada fica escondida: DECISÃO TÉCNICA
+    // (DECISIONS.md) — PENDENTE DE VERIFICAÇÃO como o original mostrava.
     public struct CharacterListResponseMessage : NetworkMessage
     {
         public CharacterSummary[] characters;
@@ -102,6 +103,9 @@ namespace CyberMU.Shared.Characters
 
         // Calculadas pelo SERVIDOR (VitalsRules, seção 8); nada é salvo no
         // banco. Por enquanto atual = máxima (não existe dano nem gasto).
+        // vitalsPending = true: a classe tem Vida/Mana PENDENTES DE
+        // VERIFICAÇÃO; os números abaixo vêm 0 e NÃO devem ser mostrados.
+        public bool vitalsPending;
         public int currentHealth;
         public int maxHealth;
         public int currentMana;

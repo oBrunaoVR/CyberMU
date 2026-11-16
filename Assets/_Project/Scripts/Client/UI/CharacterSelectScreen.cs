@@ -9,7 +9,8 @@ namespace CyberMU.Client.UI
     // - Mostra os 5 slots: vazio, ou nome + nome exibido da classe + nível.
     // - "Criar" abre um formulário com nome + classe. Só aparecem as classes
     //   que o SERVIDOR mandou como desbloqueadas (classe bloqueada fica
-    //   escondida, como no MU original). Nome exibido vem da tabela de nomes.
+    //   escondida: DECISÃO TÉCNICA — PENDENTE DE VERIFICAÇÃO como o MU
+    //   original mostrava). Nome exibido vem da tabela de nomes.
     // - Mostra as mensagens de recusa do servidor.
     // Não decide nada: quem valida (nome, classe, dono do personagem) é o servidor.
     [AddComponentMenu("CyberMU/Character Select Screen (temporária)")]

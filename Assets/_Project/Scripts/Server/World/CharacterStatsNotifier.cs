@@ -19,9 +19,11 @@ namespace CyberMU.Server.World
             // (VitalsRules, seção 8), nunca salvas no banco. Como esta função
             // roda em toda mudança (entrada no mundo, nível, pontos), o
             // recálculo acontece sempre que nível ou atributos mudam.
-            ClassCatalog.TryGet((ClassId)character.ClassId, out ClassDefinition def);
-            int maxHealth = VitalsRules.MaxHealth(def, character.Level, character.Vitality);
-            int maxMana = VitalsRules.MaxMana(def, character.Level, character.Energy);
+            // Classe com Vida/Mana PENDENTES: vai vitalsPending = true e o
+            // cliente mostra "[A DEFINIR]" em vez de 0.
+            bool vitalsKnown = VitalsRules.TryGetMax((ClassId)character.ClassId,
+                character.Level, character.Vitality, character.Energy,
+                out int maxHealth, out int maxMana);
 
             conn.Send(new CharacterStatsMessage
             {
@@ -42,6 +44,7 @@ namespace CyberMU.Server.World
                 // TEMPORÁRIO: quando houver dano/gasto de mana, Vida e Mana
                 // ATUAIS devem passar a existir no estado do personagem no
                 // servidor (ActiveCharacterRegistry), não aqui.
+                vitalsPending = !vitalsKnown,
                 currentHealth = maxHealth,
                 maxHealth = maxHealth,
                 currentMana = maxMana,

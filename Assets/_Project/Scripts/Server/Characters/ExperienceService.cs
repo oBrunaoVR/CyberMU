@@ -25,7 +25,9 @@ namespace CyberMU.Server.Characters
             var result = new ExperienceGrantResult();
             if (character == null || amount <= 0) return result;
 
-            // Seção 7: no nível máximo, não ganha mais EXP.
+            // DECISÃO TÉCNICA (DECISIONS.md, 2026-11-15) — PENDENTE DE
+            // VERIFICAÇÃO: no nível máximo, não ganha mais EXP. A seção 7 da
+            // referência só traz o nível máximo (400, PENDENTE).
             if (character.Level >= ExperienceRules.MaxLevel) return result;
 
             // Classe desconhecida não dá pontos (não acontece com dados do

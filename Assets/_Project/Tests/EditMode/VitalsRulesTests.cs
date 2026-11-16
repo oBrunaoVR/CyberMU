@@ -93,5 +93,19 @@ namespace CyberMU.Tests.EditMode
             int depois = VitalsRules.MaxHealth(def, 1, def.Vitality + 1);
             Assert.AreEqual(3, depois - antes);
         }
+
+        // i) Vida/Mana PENDENTES (Overlord) ou classe desconhecida: TryGetMax
+        //    devolve false, para nunca mandar "0" como valor real. Classe
+        //    confirmada devolve os mesmos valores das fórmulas.
+        [Test]
+        public void TryGetMaxRecusaClassePendenteOuDesconhecida()
+        {
+            Assert.IsFalse(VitalsRules.TryGetMax(ClassId.Overlord, 1, 20, 15, out _, out _));
+            Assert.IsFalse(VitalsRules.TryGetMax((ClassId)99, 1, 20, 15, out _, out _));
+
+            Assert.IsTrue(VitalsRules.TryGetMax(ClassId.Berserker, 1, 25, 10, out int hp, out int mana));
+            Assert.AreEqual(110, hp);
+            Assert.AreEqual(20, mana);
+        }
     }
 }

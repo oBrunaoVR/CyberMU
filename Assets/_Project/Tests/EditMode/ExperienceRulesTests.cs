@@ -18,8 +18,8 @@ namespace CyberMU.Tests.EditMode
             Assert.AreEqual(440, ExperienceRules.TotalExperienceToLevelUp(2));
 
             // Nível 179: (179+9) × 179 × 179 × 10 = 60.237.080.
-            // (O exemplo da RageZone, 6.023.708, omite o ×10 — ver a nota na
-            // seção 7 da referência.)
+            // (O exemplo da RageZone, 6.023.708, omite o ×10; o teste segue a
+            // fórmula da seção 7 da referência, que tem o ×10.)
             Assert.AreEqual(60_237_080, ExperienceRules.TotalExperienceToLevelUp(179));
         }
 

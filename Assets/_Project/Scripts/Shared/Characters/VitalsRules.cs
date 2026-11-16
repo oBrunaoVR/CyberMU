@@ -24,6 +24,21 @@ namespace CyberMU.Shared.Characters
                 + energy * (double)def.ManaPerEnergy);
         }
 
+        // Versão segura para quem envia ao jogador: devolve false (e 0/0)
+        // quando a classe não existe no catálogo ou tem Vida/Mana PENDENTES
+        // (hoje só o Overlord). Assim nunca se mostra "0" como valor real.
+        public static bool TryGetMax(ClassId classId, int level, int vitality, int energy,
+            out int maxHealth, out int maxMana)
+        {
+            maxHealth = 0;
+            maxMana = 0;
+            if (!ClassCatalog.TryGet(classId, out ClassDefinition def) || !def.VitalsConfirmed)
+                return false;
+            maxHealth = MaxHealth(def, level, vitality);
+            maxMana = MaxMana(def, level, energy);
+            return true;
+        }
+
         // Calcula com fração e usa a parte inteira (arredonda para baixo:
         // 20,5 vira 20). DECISÃO TÉCNICA — PENDENTE DE VERIFICAÇÃO como o
         // original arredondava.
