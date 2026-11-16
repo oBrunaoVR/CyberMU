@@ -16,6 +16,14 @@ Regra completa: seção "Regra de nomes" do CLAUDE.md.
 | Classe | Magic Gladiator | Ronin | Cybernetic Ronin | APROVADO |
 | Classe | Dark Lord | Overlord | Corporate Overlord | APROVADO |
 | Equipamento | Wings (Asas) | Jetpack | Jetpack | APROVADO (só visual; a função é a das asas) |
+| Atributo | Strength | StatId.Strength | Força | PROVISÓRIO (idioma da interface não definido) |
+| Atributo | Agility | StatId.Agility | Agilidade | PROVISÓRIO (idioma da interface não definido) |
+| Atributo | Vitality | StatId.Vitality | Vitalidade | PROVISÓRIO (idioma da interface não definido) |
+| Atributo | Energy | StatId.Energy | Energia | PROVISÓRIO (idioma da interface não definido) |
+| Atributo | Command (só Dark Lord) | StatId.Command | Comando | PROVISÓRIO (idioma da interface não definido) |
+| Termo da ficha | HP | CharacterTermId.Health | Vida | PROVISÓRIO (idioma da interface não definido) |
+| Termo da ficha | Mana | CharacterTermId.Mana | Mana | PROVISÓRIO (idioma da interface não definido) |
+| Termo da ficha | Experience (EXP) | CharacterTermId.Experience | EXP | PROVISÓRIO (idioma da interface não definido) |
 | Mapa | Lorencia | [A DEFINIR] | [A DEFINIR] | PENDENTE |
 | Moeda | Zen | [A DEFINIR] | [A DEFINIR] | PENDENTE |
 

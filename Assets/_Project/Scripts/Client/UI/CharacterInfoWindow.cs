@@ -72,7 +72,7 @@ namespace CyberMU.Client.UI
             GUILayout.Label($"Nível: {stats.level}");
             // Os dois valores vêm prontos do servidor; 0 em
             // experienceForNextLevel significa nível máximo.
-            GUILayout.Label($"EXP: {stats.experience:N0}");
+            GUILayout.Label($"{Term(CharacterTermId.Experience)}: {stats.experience:N0}");
             GUILayout.Label(stats.experienceForNextLevel > 0
                 ? $"Próximo nível: {stats.experienceForNextLevel:N0}"
                 : "Próximo nível: —");
@@ -81,23 +81,23 @@ namespace CyberMU.Client.UI
             // "[A DEFINIR]" em vez de um 0 que pareceria valor real.
             if (stats.vitalsPending)
             {
-                GUILayout.Label("Vida: [A DEFINIR]");
-                GUILayout.Label("Mana: [A DEFINIR]");
+                GUILayout.Label($"{Term(CharacterTermId.Health)}: [A DEFINIR]");
+                GUILayout.Label($"{Term(CharacterTermId.Mana)}: [A DEFINIR]");
             }
             else
             {
-                GUILayout.Label($"Vida: {stats.currentHealth} / {stats.maxHealth}");
-                GUILayout.Label($"Mana: {stats.currentMana} / {stats.maxMana}");
+                GUILayout.Label($"{Term(CharacterTermId.Health)}: {stats.currentHealth} / {stats.maxHealth}");
+                GUILayout.Label($"{Term(CharacterTermId.Mana)}: {stats.currentMana} / {stats.maxMana}");
             }
             GUILayout.Space(6f);
-            StatRow("Força", stats.strength, StatId.Strength);
-            StatRow("Agilidade", stats.agility, StatId.Agility);
-            StatRow("Vitalidade", stats.vitality, StatId.Vitality);
-            StatRow("Energia", stats.energy, StatId.Energy);
+            StatRow(stats.strength, StatId.Strength);
+            StatRow(stats.agility, StatId.Agility);
+            StatRow(stats.vitality, StatId.Vitality);
+            StatRow(stats.energy, StatId.Energy);
             // Mesma regra do servidor (StatPointService): só a classe com
             // HasCommand no ClassCatalog mostra Comando.
             if (ClassCatalog.TryGet(stats.classId, out ClassDefinition classDef) && classDef.HasCommand)
-                StatRow("Comando", stats.command, StatId.Command);
+                StatRow(stats.command, StatId.Command);
             GUILayout.Space(6f);
             GUILayout.Label($"Pontos disponíveis: {stats.levelUpPoints}");
 
@@ -106,13 +106,20 @@ namespace CyberMU.Client.UI
 
         // Uma linha de atributo. O botão + só APARECE quando há pontos
         // disponíveis; o clique envia só o atributo e espera a ficha nova.
-        private void StatRow(string label, int value, StatId stat)
+        // O nome do atributo vem da tabela de nomes (StatNames, NAMING.md).
+        private void StatRow(int value, StatId stat)
         {
             GUILayout.BeginHorizontal();
-            GUILayout.Label($"{label}: {value}");
+            GUILayout.Label($"{StatNames.GetDisplayName(stat)}: {value}");
             if (stats.levelUpPoints > 0 && GUILayout.Button("+", GUILayout.Width(24f)))
                 NetworkClient.Send(new IncreaseStatRequestMessage { stat = stat });
             GUILayout.EndHorizontal();
+        }
+
+        // Nome exibido de Vida/Mana/EXP (CharacterTermNames, NAMING.md).
+        private static string Term(CharacterTermId id)
+        {
+            return CharacterTermNames.GetDisplayName(id);
         }
 
         private void OnStats(CharacterStatsMessage msg)
