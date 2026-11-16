@@ -15,6 +15,14 @@ namespace CyberMU.Server.World
     {
         public static void SendToOwner(NetworkConnectionToClient conn, CharacterRecord character)
         {
+            // Vida e Mana máximas: calculadas de classe + nível + atributos
+            // (VitalsRules, seção 8), nunca salvas no banco. Como esta função
+            // roda em toda mudança (entrada no mundo, nível, pontos), o
+            // recálculo acontece sempre que nível ou atributos mudam.
+            ClassCatalog.TryGet((ClassId)character.ClassId, out ClassDefinition def);
+            int maxHealth = VitalsRules.MaxHealth(def, character.Level, character.Vitality);
+            int maxMana = VitalsRules.MaxMana(def, character.Level, character.Energy);
+
             conn.Send(new CharacterStatsMessage
             {
                 name = character.Name,
@@ -31,6 +39,13 @@ namespace CyberMU.Server.World
                 experienceForNextLevel = character.Level >= ExperienceRules.MaxLevel
                     ? 0
                     : ExperienceRules.TotalExperienceToLevelUp(character.Level),
+                // TEMPORÁRIO: quando houver dano/gasto de mana, Vida e Mana
+                // ATUAIS devem passar a existir no estado do personagem no
+                // servidor (ActiveCharacterRegistry), não aqui.
+                currentHealth = maxHealth,
+                maxHealth = maxHealth,
+                currentMana = maxMana,
+                maxMana = maxMana,
             });
         }
     }

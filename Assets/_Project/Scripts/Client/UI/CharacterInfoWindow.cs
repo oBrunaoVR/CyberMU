@@ -76,6 +76,10 @@ namespace CyberMU.Client.UI
             GUILayout.Label(stats.experienceForNextLevel > 0
                 ? $"Próximo nível: {stats.experienceForNextLevel:N0}"
                 : "Próximo nível: —");
+            // Valores calculados no servidor; hoje atual = máxima (sem dano
+            // nem gasto de mana ainda).
+            GUILayout.Label($"Vida: {stats.currentHealth} / {stats.maxHealth}");
+            GUILayout.Label($"Mana: {stats.currentMana} / {stats.maxMana}");
             GUILayout.Space(6f);
             StatRow("Força", stats.strength, StatId.Strength);
             StatRow("Agilidade", stats.agility, StatId.Agility);

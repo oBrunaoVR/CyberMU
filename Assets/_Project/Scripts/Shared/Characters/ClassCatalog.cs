@@ -29,6 +29,21 @@ namespace CyberMU.Shared.Characters
         // bloqueada até haver valores confirmados (regra do CLAUDE.md:
         // não inventar valores).
         public bool InitialStatsConfirmed;
+
+        // Vida e Mana máximas (MU_099D_REFERENCE.md, seção 8):
+        //   Máximo = Base + (Nível − 1) × PorNível + Atributo × PorPonto
+        // (Vida usa Vitalidade; Mana usa Energia). São DADOS da classe;
+        // a conta fica num lugar só (VitalsRules). Frações existem (ex.:
+        // 0,5 de Mana por nível no Berserker).
+        public float HealthBase;
+        public float HealthPerLevel;
+        public float HealthPerVitality;
+        public float ManaBase;
+        public float ManaPerLevel;
+        public float ManaPerEnergy;
+
+        // false = valores de Vida/Mana PENDENTES (hoje só o Overlord).
+        public bool VitalsConfirmed;
     }
 
     // Dados de todas as classes num lugar só, conforme MU_099D_REFERENCE.md
@@ -38,6 +53,7 @@ namespace CyberMU.Shared.Characters
         private static readonly ClassDefinition[] all =
         {
             // CONSENSO CLÁSSICO (três fontes concordam).
+            // Vida/Mana (seção 8): CONSENSO CLÁSSICO — nível 1 dá 110/20.
             new ClassDefinition
             {
                 Id = ClassId.Berserker,
@@ -45,8 +61,14 @@ namespace CyberMU.Shared.Characters
                 PointsPerLevel = 5,
                 CreatableAtStart = true,
                 InitialStatsConfirmed = true,
+                HealthBase = 35f, HealthPerLevel = 2f, HealthPerVitality = 3f,
+                ManaBase = 10f, ManaPerLevel = 0.5f, ManaPerEnergy = 1f,
+                VitalsConfirmed = true,
             },
             // CONSENSO CLÁSSICO (três fontes concordam).
+            // Vida/Mana (seção 8): nível 1 dá 60/60. HP por Vitalidade = 1
+            // por DECISÃO DO DONO DO PROJETO (2026-11-15): fontes divergem e
+            // guias atuais dizem 2. Valor configurável: mudar = mexer só aqui.
             new ClassDefinition
             {
                 Id = ClassId.Technomancer,
@@ -54,8 +76,14 @@ namespace CyberMU.Shared.Characters
                 PointsPerLevel = 5,
                 CreatableAtStart = true,
                 InitialStatsConfirmed = true,
+                HealthBase = 45f, HealthPerLevel = 1f, HealthPerVitality = 1f,
+                ManaBase = 0f, ManaPerLevel = 2f, ManaPerEnergy = 2f,
+                VitalsConfirmed = true,
             },
             // CONSENSO CLÁSSICO com uma fonte principal; reconfirmar.
+            // Vida/Mana (seção 8): nível 1 dá 80/30. HP por Vitalidade = 1
+            // por DECISÃO DO DONO DO PROJETO (2026-11-15): fontes divergem e
+            // guias atuais dizem 2. Valor configurável: mudar = mexer só aqui.
             new ClassDefinition
             {
                 Id = ClassId.NeonRanger,
@@ -63,10 +91,16 @@ namespace CyberMU.Shared.Characters
                 PointsPerLevel = 5,
                 CreatableAtStart = true,
                 InitialStatsConfirmed = true,
+                HealthBase = 60f, HealthPerLevel = 1f, HealthPerVitality = 1f,
+                ManaBase = 7.5f, ManaPerLevel = 1.5f, ManaPerEnergy = 1.5f,
+                VitalsConfirmed = true,
             },
             // FONTE DA ÉPOCA: desbloqueia quando um personagem da conta passa
             // do nível 220 (ou seja, nível 221 ou mais).
             // Atributos iniciais PENDENTES DE VERIFICAÇÃO -> criação bloqueada.
+            // Vida/Mana (seção 8): bases 58/8 derivadas supondo os atributos
+            // de criação 26/26/26/26 — Energia inicial PENDENTE (26 ou 16);
+            // a classe segue bloqueada até decidir.
             new ClassDefinition
             {
                 Id = ClassId.Ronin,
@@ -74,10 +108,14 @@ namespace CyberMU.Shared.Characters
                 CreatableAtStart = false,
                 UnlockAccountLevel = 221,
                 InitialStatsConfirmed = false,
+                HealthBase = 58f, HealthPerLevel = 1f, HealthPerVitality = 2f,
+                ManaBase = 8f, ManaPerLevel = 1f, ManaPerEnergy = 2f,
+                VitalsConfirmed = true,
             },
             // FONTE DA ÉPOCA: desbloqueia com personagem da conta de nível 250+.
             // Atributos iniciais (inclusive Comando) PENDENTES DE VERIFICAÇÃO
             // -> criação bloqueada.
+            // Vida/Mana (seção 8): PENDENTES (sem valores; classe bloqueada).
             new ClassDefinition
             {
                 Id = ClassId.Overlord,
@@ -86,6 +124,7 @@ namespace CyberMU.Shared.Characters
                 UnlockAccountLevel = 250,
                 HasCommand = true,
                 InitialStatsConfirmed = false,
+                VitalsConfirmed = false,
             },
         };
 

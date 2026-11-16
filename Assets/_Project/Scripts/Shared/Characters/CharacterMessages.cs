@@ -99,6 +99,13 @@ namespace CyberMU.Shared.Characters
         // Calculados pelo SERVIDOR (ExperienceRules); o cliente só mostra.
         public long experience;             // EXP total acumulada
         public long experienceForNextLevel; // 0 = está no nível máximo
+
+        // Calculadas pelo SERVIDOR (VitalsRules, seção 8); nada é salvo no
+        // banco. Por enquanto atual = máxima (não existe dano nem gasto).
+        public int currentHealth;
+        public int maxHealth;
+        public int currentMana;
+        public int maxMana;
     }
 
     // Cliente -> servidor: "quero 1 ponto no atributo X" (botão + da janela
