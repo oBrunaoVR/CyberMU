@@ -259,6 +259,7 @@ GameObject:
   - component: {fileID: 240561222}
   - component: {fileID: 240561221}
   - component: {fileID: 240561225}
+  - component: {fileID: 240561226}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -323,7 +324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Mirror::Mirror.NetworkManager
   dontDestroyOnLoad: 1
   runInBackground: 1
-  headlessStartMode: 0
+  headlessStartMode: 1
   editorAutoStart: 0
   sendRate: 60
   offlineScene: 
@@ -392,6 +393,18 @@ MonoBehaviour:
   passwordMinLength: 4
   passwordMaxLength: 10
   rejectDisconnectDelay: 3
+--- !u!114 &240561226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 240561220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 419433d637ab6944d8d776a76ef5b759, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CyberMU.Shared.Network.NetworkHudEditorOnly
 --- !u!1 &299941499
 GameObject:
   m_ObjectHideFlags: 0
